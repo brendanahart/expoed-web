@@ -4,6 +4,7 @@ import {MatIconRegistry} from '@angular/material/icon';
 import {AuthService} from '../auth/auth.service';
 import {async} from 'rxjs/internal/scheduler/async';
 import {ActivatedRoute, Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-navigation',
@@ -22,6 +23,7 @@ export class NavigationComponent implements OnInit {
   title = 'expoed';
 
   callbackURL = 'https://expoed.co';
+  callbackLoginURL = environment.loginCallback;
 
   ngOnInit(): void {
   }
