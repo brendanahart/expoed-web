@@ -1,0 +1,41 @@
+<div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="center center" class="header-spacing">
+  <div fxFlex="0 0 45%" fxFlexAlign="auto">
+    <mat-card>
+      <mat-card-content style="text-align: center">
+        <h2>
+          Find the restaurants closest to you to help out
+        </h2>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <form>
+          <div fxLayout="row" fxLayoutGap="5%">
+            <div fxFlex="0 0 80%">
+              <mat-form-field style="width: 100%">
+                <mat-label>Search Restaurants</mat-label>
+                <input matInput placeholder="Enter a zip code, restaurant name, food, etc..">
+              </mat-form-field>
+            </div>
+            <div fxFlex="0 0 20%">
+              <button mat-raised-button color="accent">Search</button>
+            </div>
+          </div>
+        </form>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around center" class="header-spacing">
+  <div fxFlex="0 0 90%" style="text-align: center">
+    <h2>About Us</h2>
+    <p>
+      Lorem ipsum dolor sit amet et delectus accommodare his consul copiosae legendos at vix ad putent delectus delicata usu. Vidit dissentiet eos cu eum an brute copiosae hendrerit. Eos erant dolorum an. Per facer affert ut. Mei iisque mentitum moderatius cu. Sit munere facilis
+    </p>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="center center" class="header-spacing" style="margin-bottom: 30px">
+  <button mat-flat-button color="primary" [routerLink]="['/partner']">Become A Restaurant Partner</button>
+</div>
+<div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="center center" class="header-spacing">
+  <img mat-card-image src="../assets/site/empty_table.jpeg" alt="Photo of empty restaurant">
+</div>

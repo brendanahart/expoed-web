@@ -1,0 +1,11 @@
+img { width: 60%; height: 60%; align-items: center; text-align: center; display: flex; justify-content: center }
+
+.header-spacing {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
