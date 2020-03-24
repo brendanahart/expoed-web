@@ -3,7 +3,7 @@
   <div class="spacing"></div>
   <h2 [routerLink]="['']"><a> {{ title }} </a></h2>
   <div fxFlex fxLayout fxLayoutAlign="end" fxLayoutGap="1%">
-    <button mat-button color="accent" *ngIf="!auth.loggedIn" (click)="auth.login('')">Sign In</button>
+    <button mat-button color="accent" *ngIf="!auth.loggedIn" (click)="auth.login(callbackLoginURL)">Sign In</button>
     <button mat-button color="accent" (click)="eaterOrRestaurant(auth)" *ngIf="auth.loggedIn">Profile</button>
     <button mat-button color="accent" *ngIf="auth.loggedIn" (click)="auth.logout()">Log Out</button>
   </div>
