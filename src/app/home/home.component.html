@@ -1,28 +1,6 @@
 <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="center center" class="header-spacing">
   <div fxFlex="0 0 45%" fxFlexAlign="auto">
-    <mat-card>
-      <mat-card-content style="text-align: center">
-        <h2>
-          Find the restaurants closest to you to help out
-        </h2>
-
-      </mat-card-content>
-      <mat-card-actions>
-        <form>
-          <div fxLayout="row" fxLayoutGap="5%">
-            <div fxFlex="0 0 80%">
-              <mat-form-field style="width: 100%">
-                <mat-label>Search Restaurants</mat-label>
-                <input matInput placeholder="Enter a zip code, restaurant name, food, etc..">
-              </mat-form-field>
-            </div>
-            <div fxFlex="0 0 20%">
-              <button mat-raised-button color="accent">Search</button>
-            </div>
-          </div>
-        </form>
-      </mat-card-actions>
-    </mat-card>
+    <app-restaurant-search-dialog></app-restaurant-search-dialog>
   </div>
 </div>
 <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around center" class="header-spacing">

@@ -5,6 +5,7 @@ import {AuthService} from '../auth/auth.service';
 import {async} from 'rxjs/internal/scheduler/async';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {Auth0Constants} from '../auth/auth-0-constants';
 
 @Component({
   selector: 'app-navigation',
@@ -20,9 +21,9 @@ export class NavigationComponent implements OnInit {
       sanitizer.bypassSecurityTrustResourceUrl('assets/logo/candy.svg'));
   }
 
-  title = 'expoed';
+  title = 'Expoed';
 
-  callbackURL = 'https://expoed.co';
+  callbackURL = Auth0Constants.callbackURL;
   callbackLoginURL = environment.loginCallback;
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class NavigationComponent implements OnInit {
   async eaterOrRestaurant(auth: AuthService): Promise<any> {
     const user = await auth.getUser$().toPromise();
 
-    const industry = user[this.callbackURL + '_' + 'user_metadata'].industry.toLowerCase();
+    const industry = user[this.callbackURL + '_' + Auth0Constants.userMetadata].industry.toLowerCase();
 
     if (industry === 'eater') {
       this.router.navigate(['/eater']);

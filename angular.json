@@ -63,11 +63,13 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "expoed:build"
+            "browserTarget": "expoed:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "expoed:build:production"
+              "browserTarget": "expoed:build:production",
+              "proxyConfig": "src/proxy-prod.conf.json"
             }
           }
         },

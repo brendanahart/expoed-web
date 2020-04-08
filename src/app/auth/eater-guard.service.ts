@@ -3,15 +3,18 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTre
 import {AuthService} from './auth.service';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
+import {ProfileType} from '../user/profile-type';
+import {Auth0Constants} from './auth-0-constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EaterGuardService implements CanActivate {
 
+  callbackUrl = Auth0Constants.callbackURL;
+
   constructor(private auth: AuthService, private router: Router) {}
 
-  callbackURL = 'https://expoed.co';
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean|UrlTree> | boolean {
     return this.auth.getUser$().pipe(
@@ -20,8 +23,8 @@ export class EaterGuardService implements CanActivate {
           this.router.navigate(['']);
           return false;
         } else {
-          const industry = user[this.callbackURL + '_' + 'user_metadata'].industry.toLowerCase();
-          if (industry === 'eater') {
+          const industry = user[this.callbackUrl + '_' + Auth0Constants.userMetadata].industry.toLowerCase();
+          if (industry === ProfileType.profileTypeE) {
             return true;
           } else {
             this.router.navigate(['/restaurant']);

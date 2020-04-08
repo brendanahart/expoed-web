@@ -7,6 +7,9 @@ import {RestaurantGuardService} from './auth/restaurant-guard.service';
 import {EaterGuardService} from './auth/eater-guard.service';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {RestaurantFaqComponent} from './faq/restaurant-faq/restaurant-faq.component';
+import {RestaurantSearchComponent} from './home/restaurant-search/restaurant-search.component';
+import {RestaurantDetailComponent} from './home/restaurant-detail/restaurant-detail.component';
+import {AuthGuard} from './auth/auth-guard.service';
 
 
 const appRoutes: Routes = [
@@ -28,7 +31,17 @@ const appRoutes: Routes = [
     path: 'partner',
     component: RestaurantFaqComponent
   },
-  { path: '**', component: PageNotFoundComponent }
+  {
+    path: 'search/:term',
+    component: RestaurantSearchComponent
+  },
+  {
+    path: 'detail/:id',
+    component: RestaurantDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({

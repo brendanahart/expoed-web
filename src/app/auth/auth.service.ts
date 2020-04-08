@@ -4,6 +4,11 @@ import Auth0Client from '@auth0/auth0-spa-js/dist/typings/Auth0Client';
 import { from, of, Observable, BehaviorSubject, combineLatest, throwError } from 'rxjs';
 import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import {Auth0Constants} from './auth-0-constants';
+import {ProfileType} from '../user/profile-type';
+import {ExpoedIdentity} from '../user/expoed-identity';
+import {PersonProfileService} from '../user/person-profile.service';
+import {RestaurantProfileService} from '../user/restaurant-profile.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +42,8 @@ export class AuthService {
   // Create a local property for login status
   loggedIn: boolean = null;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private personProfile: PersonProfileService,
+              private restaurantProfile: RestaurantProfileService) {
     // On initial load, check authentication state with authorization server
     // Set up local auth streams if user is already authenticated
     this.localAuthSetup();
@@ -107,6 +113,30 @@ export class AuthService {
       // Response will be an array of user and login status
       authComplete$.subscribe(([user, loggedIn]) => {
         // Redirect to target route after callback processing
+        // post to the database
+        if (loggedIn) {
+          const industry = user[Auth0Constants.callbackURL + '_' + Auth0Constants.userMetadata].industry.toLowerCase();
+          const expoedIdentity = new ExpoedIdentity(user.sub, user[Auth0Constants.callbackURL + '_' + Auth0Constants.userMetadata].name, user.name);
+
+          if (industry === ProfileType.profileTypeE) {
+            this.personProfile.addEater(expoedIdentity).subscribe(
+              (res) => {
+                console.log(res);
+              },
+              (err) => {
+                console.log(err);
+              });
+          } else if (industry === ProfileType.profileTypeR) {
+            this.restaurantProfile.addRestaurant(expoedIdentity).subscribe(
+              (res) => {
+                console.log(res);
+              },
+              (err) => {
+                console.log(err);
+              });
+          }
+        }
+
         this.router.navigate([targetRoute]);
       });
     }

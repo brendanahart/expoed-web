@@ -1,0 +1,23 @@
+.header-spacing {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.matDividerMargin {
+  margin-top: 2%;
+  margin-bottom: 2%
+}
+
+.matCardDivider {
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.paginatorDivider {
+  margin-top: 3%;
+}
+
+img {
+  max-width: 100%;
+}

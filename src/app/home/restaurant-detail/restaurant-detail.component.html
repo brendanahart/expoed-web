@@ -1,0 +1,40 @@
+<div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around center" style="margin-top: 2%">
+  <div fxFlex="30%">
+    <div *ngIf="restaurant.pictureUrl !== '' && restaurant.pictureUrl !== null">
+      <img [src]="restaurant.pictureUrl" alt="Profile Picture" />
+    </div>
+    <mat-divider class="matDividerMargin"></mat-divider>
+    <h1>Restaurant Info</h1>
+    <h2> {{ restaurant.restaurant.name }}</h2>
+    <h3> {{ restaurant.description }} </h3>
+    <h3> Verified: {{ restaurant.verified }} </h3>
+    <h3> Address: {{ restaurant.address }} {{ restaurant.addressTwo }}, {{ restaurant.city }}, {{ restaurant.state }} {{ restaurant.zipCode }}</h3>
+    <div><a *ngIf="restaurant.instagram != ''" mat-button (click)="onExternalLink(restaurant.instagram)">Instagram</a></div>
+    <div><a *ngIf="restaurant.twitter != ''" mat-button (click)="onExternalLink(restaurant.twitter)">Twitter</a></div>
+    <div><a *ngIf="restaurant.facebook != ''" mat-button (click)="onExternalLink(restaurant.facebook)">Facebook</a></div>
+    <div><a mat-flat-button *ngIf="restaurant.website != ''" (click)="onExternalLink(restaurant.website)">Website</a></div>
+    <mat-divider class="matDividerMargin"></mat-divider>
+    <div class="restaurantHelpers">
+      <h1 style="text-align: center">Helpers</h1>
+      <h4 *ngFor="let help of helpers">{{ help.helper }} - {{ help.offerName}}</h4>
+    </div>
+  </div>
+  <div fxFlex="60%">
+    <h1 style="text-align: center">List of Current Offers</h1>
+    <mat-card *ngFor="let offer of restaurantOfferings" style="margin-bottom: 2%">
+      <mat-card-content>
+        <h3> {{ offer.offeringName }}</h3>
+        <p> {{ offer.offeringDesc}}</p>
+        <p> Price: ${{ offer.price}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="accent" (click)="onBuyHandler(offer, this.restaurant)">Buy</button>
+      </mat-card-actions>
+    </mat-card>
+    <button mat-raised-button color="accent">Tip Jar</button>
+  </div>
+</div>
+<div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around start" style="margin-top: 2%">
+  <div>
+  </div>
+</div>

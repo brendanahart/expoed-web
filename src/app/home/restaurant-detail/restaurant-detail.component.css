@@ -1,0 +1,13 @@
+.matDividerMargin {
+  margin-top: 2%;
+  margin-bottom: 2%
+}
+
+.restaurantHelpers {
+  height: 200px;
+  overflow: scroll;
+}
+
+img {
+  max-width: 100%;
+}

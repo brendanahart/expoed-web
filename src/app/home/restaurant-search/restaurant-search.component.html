@@ -1,0 +1,65 @@
+<div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="center center" class="header-spacing">
+  <div fxFlex="0 0 45%" fxFlexAlign="auto">
+    <app-restaurant-search-dialog></app-restaurant-search-dialog>
+  </div>
+</div>
+<h2 style="text-align: center" *ngIf="splicedRestaurants.length == 0">We couldn't find any restaurants that you searched for!</h2>
+<div *ngIf="splicedRestaurants.length > 0" class="matDividerMargin">
+  <mat-card *ngFor="let restaurantInfo of splicedRestaurants" class="matCardDivider">
+    <mat-card-title> {{ restaurantInfo.restaurant.name }}</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around stretch">
+        <div fxFlex="45%">
+          <img [src]="restaurantInfo.pictureUrl" alt="Photo of Restaurant">
+        </div>
+        <div fxFlex="45%">
+          <p>
+            {{ restaurantInfo.description }}
+          </p>
+          <p>
+            Address: {{ restaurantInfo.address }} {{ restaurantInfo.addressTwo }}, {{ restaurantInfo.city }}, {{ restaurantInfo.state }} {{ restaurantInfo.zipCode }}
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button color="primary" [routerLink]="['/detail', restaurantInfo.restaurant.id]">View</a>
+    </mat-card-actions>
+  </mat-card>
+  <mat-paginator class="paginatorDivider" [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="pageEvent = handlePageEvent($event)">
+  </mat-paginator>
+  <mat-divider class="matDividerMargin"></mat-divider>
+</div>
+<div *ngIf="otherSplicedRestaurants.length > 0">
+  <h2 style="text-align: center">Here are some other restaurants we may think you enjoy</h2>
+  <mat-card *ngFor="let restaurantInfo of otherSplicedRestaurants" class="matCardDivider">
+    <mat-card-title> {{ restaurantInfo.restaurant.name }}</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around center">
+        <div fxFlex="45%">
+          <img [src]="restaurantInfo.pictureUrl" alt="Photo of Restaurant">
+        </div>
+        <div fxFlex="45%">
+          <p>
+            {{ restaurantInfo.description }}
+          </p>
+          <p>
+            Address: {{ restaurantInfo.address }} {{ restaurantInfo.addressTwo }}, {{ restaurantInfo.city }}, {{ restaurantInfo.state }} {{ restaurantInfo.zipCode }}
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button color="primary" [routerLink]="['/detail', restaurantInfo.restaurant.id]">View</a>
+    </mat-card-actions>
+  </mat-card>
+  <mat-paginator class="paginatorDivider" [length]="otherLength"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="otherPageEvent = otherHandlePageEvent($event)">
+  </mat-paginator>
+</div>
+

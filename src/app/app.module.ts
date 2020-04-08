@@ -19,6 +19,15 @@ import { HomeComponent } from './home/home.component';
 import { RestaurantProfileComponent } from './user/restaurant-profile/restaurant-profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RestaurantFaqComponent } from './faq/restaurant-faq/restaurant-faq.component';
+import { RestaurantSearchComponent } from './home/restaurant-search/restaurant-search.component';
+import { RestaurantSearchDialogComponent } from './home/restaurant-search-dialog/restaurant-search-dialog.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDividerModule} from '@angular/material/divider';
+import { ImageComponent } from './user/image/image.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { RestaurantDetailComponent } from './home/restaurant-detail/restaurant-detail.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -28,7 +37,11 @@ import { RestaurantFaqComponent } from './faq/restaurant-faq/restaurant-faq.comp
     HomeComponent,
     RestaurantProfileComponent,
     PageNotFoundComponent,
-    RestaurantFaqComponent
+    RestaurantFaqComponent,
+    RestaurantSearchComponent,
+    RestaurantSearchDialogComponent,
+    ImageComponent,
+    RestaurantDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -42,8 +55,13 @@ import { RestaurantFaqComponent } from './faq/restaurant-faq/restaurant-faq.comp
     FlexLayoutModule,
     MatCardModule,
     MatInputModule,
+    MatGridListModule,
+    MatTableModule,
     FormsModule,
     ReactiveFormsModule,
+    MatPaginatorModule,
+    MatDividerModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

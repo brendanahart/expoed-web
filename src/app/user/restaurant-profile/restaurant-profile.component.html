@@ -1,1 +1,186 @@
-<p>restaurant-profile works!</p>
+<div *ngIf="auth.userProfile$ | async as profile">
+  <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around center" style="margin-top: 2%">
+    <div fxFlex="30%">
+      <h1 style="text-align: center">Hello {{ profile['https://expoed.co_user_metadata'].name }}!</h1>
+    </div>
+    <div fxFlex="30%">
+      <h1 style="text-align: center"> Verified: {{ restaurantInfo.verified }}</h1>
+    </div>
+    <div fxFlex="30%">
+      <a class="stripe-connect" style="text-align: center" (click)="onHandleConnectWithStripe()" *ngIf="restaurantInfo.stripe == ''"><span>Connect with Stripe</span></a>
+      <a class="stripe-connect" style="text-align: center" (click)="onHandleGoToDashboard()" *ngIf="restaurantInfo.stripe != ''"><span>View Stripe Dashboard</span></a>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around center" style="margin-top: 2%">
+    <div fxFlex="45%">
+      <h2>Restaurant Info</h2>
+      <mat-divider class="matDividerMargin"></mat-divider>
+      <div *ngIf="restaurantInfo.pictureUrl !== '' && restaurantInfo.pictureUrl !== null">
+        <img [src]="restaurantInfo.pictureUrl" alt="Profile Picture" />
+      </div>
+      <div>
+        <app-image [type]="profileTypeR" [profile]="profile" (uploadedUrl)="onUploadImage($event)"></app-image>
+      </div>
+      <mat-divider class="matDividerMargin"></mat-divider>
+      <form [formGroup]="restaurantInfoForm" (ngSubmit)="onRestaurantInfoSubmit()">
+        <mat-form-field class="formInputWidth">
+          <mat-label>Company</mat-label>
+          <input matInput disabled [value]="profile['https://expoed.co_user_metadata'].name">
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>Email</mat-label>
+          <input matInput disabled [value]="profile.name">
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>Id</mat-label>
+          <input matInput disabled [value]="profile.sub">
+          <mat-hint align="start"><strong>Keep this secret, this is how offers are verified</strong> </mat-hint>
+        </mat-form-field>
+        <p>
+          <mat-form-field class="formInputWidth">
+            <mat-label>Address</mat-label>
+            <textarea matInput formControlName="address" placeholder="Ex. 100 Main St" [value]="restaurantInfo.address" [(ngModel)]="restaurantInfo.address">{{ restaurantInfo.address }}</textarea>
+          </mat-form-field>
+          <mat-form-field class="formInputWidth">
+            <mat-label>Address 2</mat-label>
+            <textarea matInput formControlName="addressTwo" [value]="restaurantInfo.addressTwo" [(ngModel)]="restaurantInfo.addressTwo">{{ restaurantInfo.addressTwo }}</textarea>
+          </mat-form-field>
+        </p>
+        <mat-form-field class="formInputWidth">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="Ex. San Francisco" formControlName="city" [(ngModel)]="restaurantInfo.city" [value]="restaurantInfo.city">
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="Ex. California" formControlName="state" [value]="restaurantInfo.state" [(ngModel)]="restaurantInfo.state">
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>Postal Code</mat-label>
+          <input matInput maxlength="5" placeholder="Ex. 94105" formControlName="zipCode" [value]="restaurantInfo.zipCode" [(ngModel)]="restaurantInfo.zipCode">
+          <mat-hint align="end">Length: 5</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>Facebook</mat-label>
+          <input matInput placeholder="www.facebook.com/ricks" formControlName="facebook" [value]="restaurantInfo.facebook" [(ngModel)]="restaurantInfo.facebook">
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>Instagram</mat-label>
+          <input matInput placeholder="www.instagram.com/ricks" formControlName="instagram" [value]="restaurantInfo.instagram" [(ngModel)]="restaurantInfo.instagram">
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>Twitter</mat-label>
+          <input matInput placeholder="www.twitter.com/ricks" formControlName="twitter" [value]="restaurantInfo.twitter" [(ngModel)]="restaurantInfo.twitter">
+        </mat-form-field>
+        <mat-form-field class="formInputWidth">
+          <mat-label>Website</mat-label>
+          <input matInput placeholder="www.ricksamericancafe.com" formControlName="website" [value]="restaurantInfo.website" [(ngModel)]="restaurantInfo.website">
+        </mat-form-field>
+        <p>
+          <mat-form-field class="formInputWidth">
+            <mat-label>Restaurant Description</mat-label>
+            <textarea matInput placeholder="This is a great restaurant!" formControlName="description" [value]="restaurantInfo.description" [(ngModel)]="restaurantInfo.description">{{ restaurantInfo.description }}</textarea>
+          </mat-form-field>
+        </p>
+        <button mat-flat-button color="accent" type="submit" [disabled]="!restaurantInfoForm.valid">Submit</button>
+      </form>
+    </div>
+    <div fxFlex="45%">
+      <h1 style="text-align: center">List of Current Offers</h1>
+      <mat-card *ngFor="let offer of restaurantOfferings" style="margin-bottom: 2%">
+        <mat-card-content style="text-align: center">
+          <h3> Offer Name: {{ offer.offeringName }}</h3>
+          <p> Description: {{ offer.offeringDesc}}</p>
+          <p> Price: ${{ offer.price}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="warn" (click)="deleteOffering(offer)">Delete Offering</button>
+        </mat-card-actions>
+      </mat-card>
+      <button mat-flat-button color="primary" *ngIf="!offeringAdded" (click)="sparkAddOfferingForm()" class="button-container">Add Offering</button>
+      <div *ngIf="offeringAdded">
+        <form [formGroup]="restaurantOfferForm" (ngSubmit)="onRestaurantOfferSubmit()">
+          <mat-form-field class="formInputWidth">
+            <mat-label>Offer Name</mat-label>
+            <input matInput placeholder="Ex. Pizza" formControlName="offeringName">
+          </mat-form-field>
+          <mat-form-field class="formInputWidth">
+            <mat-label>Offer Description</mat-label>
+            <textarea matInput formControlName="offeringDesc" placeholder="Reservation for 7pm on a Friday of your choosing"></textarea>
+          </mat-form-field>
+          <mat-form-field class="formInputWidth">
+            <mat-label>Price</mat-label>
+            <input matInput placeholder="10" type="number" formControlName="price">
+            <mat-hint align="start"><strong>Input a number, in dollars ($)</strong> </mat-hint>
+          </mat-form-field>
+          <button mat-flat-button color="accent" type="submit" [disabled]="!restaurantOfferForm.valid">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around center" style="margin-top: 2%">
+    <div>
+      <h1>Offers Purchased from Eaters</h1>
+      <table mat-table
+             [dataSource]="offersPurchased" multiTemplateDataRows class="mat-elevation-z8">
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; index as i">
+          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+          <td mat-cell *matCellDef="let element"> {{element[columnsToDisplayIndex[i]]}} </td>
+        </ng-container>
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+            <div class="example-element-detail"
+                 [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+              <div class="example-element-diagram">
+                <h3>Offer Details</h3>
+                <p> Price: ${{element.price}} </p>
+                <p> Description: {{element.offerDesc}} </p>
+                <h3>Redemption Details</h3>
+                <p> Transaction Id: {{element.txId}} </p>
+                <p> User Auth Id: {{element.authId}} </p>
+                <button mat-flat-button color="accent" class="matCardDivider" (click)="onOfferRedeemedR(expandedElement)">Confirmed Offer Redeemed</button>
+                <button mat-flat-button color="primary" class="matCardDivider" (click)="onOfferNotRedeemedR(expandedElement)">Confirmed Offer Not Redeemed</button>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+            class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around center" style="margin-top: 5%">
+    <div fxFlex="95%">
+      <h1 style="text-align: center">List of Other Restaurants Expoed</h1>
+      <mat-grid-list [cols]="gridListBreakpoint" rowHeight="500px" (window:resize)="onResize($event)">
+        <mat-grid-tile *ngFor="let offer of offers">
+          <mat-card class="matCardDivider">
+            <mat-card-content>
+              <h3>Restaurant Details:</h3>
+              <p> Restaurant Name: {{ offer.restaurantName }}</p>
+              <p> Restaurant Email: {{ offer.restaurantEmail }}</p>
+              <h3>Offer Details:</h3>
+              <p> Offer Name: {{ offer.offerName }}</p>
+              <p> Price Paid: ${{ offer.offerPrice }}</p>
+              <h3>Redemption Details:</h3>
+              <p> Transaction Id: {{ offer.txId}}</p>
+              <p> Restaurant Confirmed Redeemed: {{ offer.redeemedRestaurant}}</p>
+              <p> User Confirmed Redeemed: {{ offer.redeemedUser}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-flat-button color="accent" class="matCardDivider" (click)="onOfferRedeemed(offer)">Confirmed Offer Redeemed</button>
+              <button mat-flat-button color="primary" class="matCardDivider" (click)="onOfferNotRedeemed(offer)">Confirmed Offer Not Redeemed</button>
+            </mat-card-actions>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+  </div>

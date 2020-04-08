@@ -1,0 +1,13 @@
+<button mat-button color="accent" (click)="openFileUpload()">
+  <mat-icon>file_upload</mat-icon> Upload Profile Picture
+</button>
+<label id="imageLabel">
+  <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput, profile, profileType)" style="display:none;">
+</label>
+
+<div *ngIf="selectedFile">
+  <mat-chip-list>
+    <div *ngIf="selectedFile.status === 'ok'"><mat-chip color="accent">Image Upload Success!</mat-chip></div>
+    <div *ngIf="selectedFile.status === 'fail'"><mat-chip color="warn">Image Upload Failed!</mat-chip></div>
+  </mat-chip-list>
+</div>
