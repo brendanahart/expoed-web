@@ -187,7 +187,10 @@ only screen and (min-device-pixel-ratio: 1.5) {
 }
 
 table {
-  width: 100%;
+  table-layout: fixed;
+  width: 98%;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 tr.example-detail-row {
@@ -216,7 +219,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   padding: 8px;
   font-weight: lighter;
   margin: 8px 0;
-  height: 350px;
+  height: 425px;
 }
 
 img {max-width:100%;}

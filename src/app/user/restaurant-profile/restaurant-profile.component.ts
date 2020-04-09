@@ -77,8 +77,8 @@ export class RestaurantProfileComponent implements OnInit {
     this.gridListBreakpoint = (window.innerWidth <= 1200) ? 1 : 2;
 
     if (window.innerWidth <= 900) {
-      this.columnsToDisplay = ['Name', 'Email', 'Offer Name'];
-      this.columnsToDisplayIndex = ['name', 'email', 'offerName'];
+      this.columnsToDisplay = ['Name', 'Offer Name'];
+      this.columnsToDisplayIndex = ['name', 'offerName'];
     } else {
       this.columnsToDisplay = ['Name', 'Email', 'Offer Name', 'Price', 'Redeemed', 'User Confirmed Redeem'];
       this.columnsToDisplayIndex = ['name', 'email', 'offerName', 'price', 'redeemedRestaurant', 'redeemedUser'];
@@ -287,8 +287,8 @@ export class RestaurantProfileComponent implements OnInit {
 
   onResizeTable(event): void {
     if (event.target.innerWidth <= 900) {
-      this.columnsToDisplay = ['Name', 'Email', 'Offer Name'];
-      this.columnsToDisplayIndex = ['name', 'email', 'offerName'];
+      this.columnsToDisplay = ['Name', 'Offer Name'];
+      this.columnsToDisplayIndex = ['name', 'offerName'];
     } else {
       this.columnsToDisplay = ['Name', 'Email', 'Offer Name', 'Price', 'Redeemed', 'User Confirmed Redeem'];
       this.columnsToDisplayIndex = ['name', 'email', 'offerName', 'price', 'redeemedRestaurant', 'redeemedUser'];
