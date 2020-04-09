@@ -1,7 +1,7 @@
 <div *ngIf="auth.userProfile$ | async as profile">
   <h1 style="text-align: center; margin-top: 2%"> Hello, {{ profile['https://expoed.co_user_metadata'].name }}!</h1>
   <mat-divider class="matDividerMargin"></mat-divider>
-  <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around center" style="margin-top: 5%">
+  <div fxLayout="row" fxLayoutGap="2%" fxLayout.lt-sm="column" fxLayoutAlign="space-around center" style="margin-top: 5%">
     <div fxFlex="45%">
       <div *ngIf="userInfo.pictureUrl !== '' && userInfo.pictureUrl !== null">
         <img src="{{ userInfo.pictureUrl }}" alt="Profile Picture" class="imageResize"/>

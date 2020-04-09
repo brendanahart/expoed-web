@@ -7,15 +7,17 @@
   </mat-card-content>
   <mat-card-actions>
     <form>
-      <div fxLayout="row" fxLayoutGap="5%">
-        <div fxFlex="0 0 80%">
+      <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+        <div fxFlex="90%">
           <mat-form-field style="width: 100%">
             <mat-label>Search Restaurants</mat-label>
             <input matInput placeholder="Enter a restaurant name" type="text" [(ngModel)]="searchInput"
                    [ngModelOptions]="{standalone: true}">
           </mat-form-field>
         </div>
-        <div fxFlex="0 0 20%">
+      </div>
+      <div fxLayout="row" fxLayoutGap="5%" fxLayout.lt-sm="column" fxLayoutAlign="space-around center">
+        <div>
           <button mat-raised-button color="primary" (click)="search(searchInput)">Search</button>
         </div>
       </div>

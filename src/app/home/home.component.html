@@ -11,7 +11,7 @@
     </p>
   </div>
 </div>
-<div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="center center" class="header-spacing" style="margin-bottom: 30px">
+<div fxLayout="row" fxLayoutGap="2%" fxLayout.lt-sm="column" fxLayoutAlign="center center" class="header-spacing" style="margin-bottom: 30px">
   <button mat-flat-button color="primary" [routerLink]="['/partner']">Become an Expoed Restaurant Partner</button>
   <button mat-flat-button color="primary" (click)="auth.login(callbackLoginURL)">Join Expoed as an Eater</button>
 </div>

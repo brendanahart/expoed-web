@@ -9,6 +9,7 @@
 
 .matCardDivider {
   margin: 2%;
+  overflow: scroll;
 }
 
 img {max-width:100%;}
