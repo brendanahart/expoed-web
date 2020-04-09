@@ -1,5 +1,5 @@
 <div *ngIf="auth.userProfile$ | async as profile">
-  <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around center" style="margin-top: 2%">
+  <div fxLayout="row" fxLayoutGap="2%" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="2%" fxLayoutAlign="space-around center" style="margin-top: 2%">
     <div fxFlex="30%">
       <h1 style="text-align: center">Hello {{ profile['https://expoed.co_user_metadata'].name }}!</h1>
     </div>
@@ -11,7 +11,7 @@
       <a class="stripe-connect" style="text-align: center" (click)="onHandleGoToDashboard()" *ngIf="restaurantInfo.stripe != ''"><span>View Stripe Dashboard</span></a>
     </div>
   </div>
-  <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around center" style="margin-top: 2%">
+  <div fxLayout="row" fxLayoutGap="2%" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="2%" fxLayoutAlign="space-around center" style="margin-top: 2%">
     <div fxFlex="45%">
       <h2>Restaurant Info</h2>
       <mat-divider class="matDividerMargin"></mat-divider>

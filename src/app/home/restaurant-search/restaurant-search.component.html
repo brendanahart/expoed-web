@@ -8,11 +8,11 @@
   <mat-card *ngFor="let restaurantInfo of splicedRestaurants" class="matCardDivider">
     <mat-card-title> {{ restaurantInfo.restaurant.name }}</mat-card-title>
     <mat-card-content>
-      <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="space-around stretch">
-        <div fxFlex="45%">
+      <div fxLayout="row" fxLayoutGap="2%" fxLayoutGap.lt-sm="2%" fxLayout.lt-sm="column" fxLayoutAlign="space-around stretch">
+        <div fxFlex="45%" fxFlex.lt-sm="100%">
           <img [src]="restaurantInfo.pictureUrl" alt="Photo of Restaurant">
         </div>
-        <div fxFlex="45%">
+        <div fxFlex="45%" fxFlex.lt-sm="100%">
           <p>
             {{ restaurantInfo.description }}
           </p>
