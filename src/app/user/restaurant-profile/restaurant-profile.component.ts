@@ -76,6 +76,14 @@ export class RestaurantProfileComponent implements OnInit {
     this.offers = [];
     this.gridListBreakpoint = (window.innerWidth <= 1200) ? 1 : 2;
 
+    if (window.innerWidth <= 900) {
+      this.columnsToDisplay = ['Name', 'Email', 'Offer Name'];
+      this.columnsToDisplayIndex = ['name', 'email', 'offerName'];
+    } else {
+      this.columnsToDisplay = ['Name', 'Email', 'Offer Name', 'Price', 'Redeemed', 'User Confirmed Redeem'];
+      this.columnsToDisplayIndex = ['name', 'email', 'offerName', 'price', 'redeemedRestaurant', 'redeemedUser'];
+    }
+
     this.offeringAdded = false;
     this.restaurantInfo = new RestaurantInfo();
     this.restaurantOfferings = [];
@@ -275,6 +283,18 @@ export class RestaurantProfileComponent implements OnInit {
   onUploadImage(url: string) {
     this.restaurantInfo.pictureUrl = url;
     this.cdRef.detectChanges();
+  }
+
+  onResizeTable(event): void {
+    if (event.target.innerWidth <= 900) {
+      this.columnsToDisplay = ['Name', 'Email', 'Offer Name'];
+      this.columnsToDisplayIndex = ['name', 'email', 'offerName'];
+    } else {
+      this.columnsToDisplay = ['Name', 'Email', 'Offer Name', 'Price', 'Redeemed', 'User Confirmed Redeem'];
+      this.columnsToDisplayIndex = ['name', 'email', 'offerName', 'price', 'redeemedRestaurant', 'redeemedUser'];
+    }
+
+    this.gridListBreakpoint = (event.target.innerWidth <= 1200) ? 1 : 2;
   }
 
 }

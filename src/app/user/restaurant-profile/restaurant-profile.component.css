@@ -195,11 +195,11 @@ tr.example-detail-row {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
+  background: darkseagreen;
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
+  background: darkseagreen;
 }
 
 .example-element-row td {
@@ -216,7 +216,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   padding: 8px;
   font-weight: lighter;
   margin: 8px 0;
-  height: 300px;
+  height: 350px;
 }
 
 img {max-width:100%;}

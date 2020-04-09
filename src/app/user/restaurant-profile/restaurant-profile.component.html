@@ -119,9 +119,9 @@
   </div>
   <div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around center" style="margin-top: 2%">
     <div>
-      <h1>Offers Purchased from Eaters</h1>
+      <h1 style="text-align: center">Offers Purchased from Eaters</h1>
       <table mat-table
-             [dataSource]="offersPurchased" multiTemplateDataRows class="mat-elevation-z8">
+             [dataSource]="offersPurchased" multiTemplateDataRows class="mat-elevation-z8" (window:resize)="onResizeTable($event)">
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay; index as i">
           <th mat-header-cell *matHeaderCellDef> {{column}} </th>
           <td mat-cell *matCellDef="let element"> {{element[columnsToDisplayIndex[i]]}} </td>
@@ -139,6 +139,8 @@
                 <h3>Redemption Details</h3>
                 <p> Transaction Id: {{element.txId}} </p>
                 <p> User Auth Id: {{element.authId}} </p>
+                <p> Redeemed: {{ element.redeemedRestaurant }}</p>
+                <p> User Confirmed Redeemed: {{ element.redeemedUser }}</p>
                 <button mat-flat-button color="accent" class="matCardDivider" (click)="onOfferRedeemedR(expandedElement)">Confirmed Offer Redeemed</button>
                 <button mat-flat-button color="primary" class="matCardDivider" (click)="onOfferNotRedeemedR(expandedElement)">Confirmed Offer Not Redeemed</button>
               </div>
