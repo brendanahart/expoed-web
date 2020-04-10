@@ -29,6 +29,7 @@ import { RestaurantDetailComponent } from './home/restaurant-detail/restaurant-d
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import { FooterComponent } from './navigation/footer/footer.component';
+import { UserFaqComponent } from './faq/user-faq/user-faq.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { FooterComponent } from './navigation/footer/footer.component';
     ImageComponent,
     RestaurantDetailComponent,
     FooterComponent,
+    UserFaqComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,15 @@
+.footerText {
+  text-align: right;
+  font-size: x-small;
+  color: slategray;
+  max-height: 18px;
+}
+
+.footerTextContainer {
+  display: inline-grid;
+  margin-bottom: auto;
+}
+
+.example-fill-remaining-space {
+  flex: 1 1 auto;
+}

@@ -10,6 +10,7 @@ import {RestaurantFaqComponent} from './faq/restaurant-faq/restaurant-faq.compon
 import {RestaurantSearchComponent} from './home/restaurant-search/restaurant-search.component';
 import {RestaurantDetailComponent} from './home/restaurant-detail/restaurant-detail.component';
 import {AuthGuard} from './auth/auth-guard.service';
+import {UserFaqComponent} from './faq/user-faq/user-faq.component';
 
 
 const appRoutes: Routes = [
@@ -30,6 +31,10 @@ const appRoutes: Routes = [
   {
     path: 'partner',
     component: RestaurantFaqComponent
+  },
+  {
+    path: 'waiting',
+    component: UserFaqComponent
   },
   {
     path: 'search/:term',
