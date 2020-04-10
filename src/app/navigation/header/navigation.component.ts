@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../auth/auth.service';
 import {async} from 'rxjs/internal/scheduler/async';
 import {ActivatedRoute, Router} from '@angular/router';
-import {environment} from '../../environments/environment';
-import {Auth0Constants} from '../auth/auth-0-constants';
+import {environment} from '../../../environments/environment';
+import {Auth0Constants} from '../../auth/auth-0-constants';
 
 @Component({
   selector: 'app-navigation',

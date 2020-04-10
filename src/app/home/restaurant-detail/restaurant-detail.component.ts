@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {RestaurantsService} from '../../search/restaurants.service';
 import {Observable} from 'rxjs';
@@ -15,6 +15,7 @@ import {environment} from '../../../environments/environment';
 import {OfferPaymentService} from '../offer-payment.service';
 import {loadStripe} from '@stripe/stripe-js';
 import {Helper} from './helper';
+import {AuthGuard} from '../../auth/auth-guard.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class RestaurantDetailComponent implements OnInit {
   userId: string;
 
   constructor(private route: ActivatedRoute, private service: RestaurantProfileService,
-              private auth: AuthService, private router: Router, private payment: OfferPaymentService) { }
+              private auth: AuthService, private router: Router, private payment: OfferPaymentService, private authGuard: AuthGuard) { }
 
   ngOnInit(): void {
     this.restaurant = new RestaurantInfo();
@@ -93,38 +94,47 @@ export class RestaurantDetailComponent implements OnInit {
   }
 
   onBuyHandler(offer: RestaurantOffering, restaurant: RestaurantInfo) {
-    // create a payment object
-    const paymentInfo = new PaymentInfo(offer, restaurant.restaurant, this.restaurant.stripe,
-      this.domainDetail + this.router.url, this.user);
 
-    if (this.industry === ProfileType.profileTypeE) {
-      paymentInfo.returnUrl = this.domainDetail + '/eater';
-    } else {
-      paymentInfo.returnUrl = this.domainDetail + '/restaurant';
-    }
+    this.auth.isAuthenticated$.subscribe((res) => {
+      const loggedIn = res;
 
-    this.payment.postPaymentInfo(paymentInfo).subscribe(async res => {
-      const stripeCheckoutId = res['id'];
+      if (!loggedIn) {
+        this.auth.login(this.router.routerState.snapshot.url);
+      } else {
+        // create a payment object
+        const paymentInfo = new PaymentInfo(offer, restaurant.restaurant, this.restaurant.stripe,
+          this.domainDetail + this.router.url, this.user);
 
-      const stripe = await loadStripe(environment.stripeKey, {
-        stripeAccount: this.restaurant.stripe
-      });
+        if (this.industry === ProfileType.profileTypeE) {
+          paymentInfo.returnUrl = this.domainDetail + '/eater';
+        } else {
+          paymentInfo.returnUrl = this.domainDetail + '/restaurant';
+        }
 
-      stripe.redirectToCheckout({
-        // Make the id field from the Checkout Session creation API response
-        // available to this file, so you can provide it as parameter here
-        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
-        sessionId: stripeCheckoutId,
-      }).then( (result) => {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer
-        // using `result.error.message`.
-        console.log(result.error.message);
-      }).catch((result) => {
-        console.log(result);
-      });
+        this.payment.postPaymentInfo(paymentInfo).subscribe(async res => {
+          const stripeCheckoutId = res['id'];
+
+          const stripe = await loadStripe(environment.stripeKey, {
+            stripeAccount: paymentInfo.stripe
+          });
+
+          stripe.redirectToCheckout({
+            // Make the id field from the Checkout Session creation API response
+            // available to this file, so you can provide it as parameter here
+            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+            sessionId: stripeCheckoutId,
+          }).then( (result) => {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+            console.log(result.error.message);
+          }).catch((result) => {
+            console.log(result);
+          });
+        });
+      }
+    }, (err) => {
+      console.log(err);
     });
-
   }
-
 }

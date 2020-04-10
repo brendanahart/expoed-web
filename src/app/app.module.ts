@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PersonProfileComponent } from './user/person-profile/person-profile.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './navigation/header/navigation.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -28,6 +28,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { RestaurantDetailComponent } from './home/restaurant-detail/restaurant-detail.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
+import { FooterComponent } from './navigation/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {MatTableModule} from '@angular/material/table';
     RestaurantSearchComponent,
     RestaurantSearchDialogComponent,
     ImageComponent,
-    RestaurantDetailComponent
+    RestaurantDetailComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

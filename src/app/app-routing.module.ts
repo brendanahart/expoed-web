@@ -38,7 +38,6 @@ const appRoutes: Routes = [
   {
     path: 'detail/:id',
     component: RestaurantDetailComponent,
-    canActivate: [AuthGuard]
   },
   { path: '**', component: PageNotFoundComponent },
 
