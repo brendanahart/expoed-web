@@ -2,3 +2,11 @@
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.homeLink:focus {
+  outline: 0;
+}
+
+.homeLink:hover {
+  cursor: pointer;
+}

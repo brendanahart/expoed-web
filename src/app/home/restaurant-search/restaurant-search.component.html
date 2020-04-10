@@ -3,7 +3,7 @@
     <app-restaurant-search-dialog></app-restaurant-search-dialog>
   </div>
 </div>
-<h2 style="text-align: center" *ngIf="splicedRestaurants.length == 0">We couldn't find any restaurants that you searched for!</h2>
+<h2 class="restaurant-search-text" *ngIf="splicedRestaurants.length == 0">We couldn't find any restaurants that you searched for!</h2>
 <div *ngIf="splicedRestaurants.length > 0" class="matDividerMargin">
   <mat-card *ngFor="let restaurantInfo of splicedRestaurants" class="matCardDivider">
     <mat-card-title> {{ restaurantInfo.restaurant.name }}</mat-card-title>
@@ -34,7 +34,7 @@
   <mat-divider class="matDividerMargin"></mat-divider>
 </div>
 <div *ngIf="otherSplicedRestaurants.length > 0">
-  <h2 style="text-align: center">Here are some other restaurants we may think you enjoy</h2>
+  <h2 class="restaurant-search-text">Here are some other restaurants we may think you enjoy</h2>
   <mat-card *ngFor="let restaurantInfo of otherSplicedRestaurants" class="matCardDivider">
     <mat-card-title> {{ restaurantInfo.restaurant.name }}</mat-card-title>
     <mat-card-content>

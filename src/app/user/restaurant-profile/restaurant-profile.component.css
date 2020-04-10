@@ -224,3 +224,10 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 img {max-width:100%;}
 
+.restaurant-profile-container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+

@@ -13,3 +13,9 @@
 }
 
 img {max-width:100%;}
+
+.person-profile-padding {
+  margin-top: 5%;
+  padding-left: 3%;
+  padding-right: 3%;
+}

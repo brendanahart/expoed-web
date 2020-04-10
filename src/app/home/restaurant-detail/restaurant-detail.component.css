@@ -11,3 +11,34 @@
 img {
   max-width: 100%;
 }
+
+.restaurant-detail-container {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.fa {
+  padding: 10px;
+  font-size: small;
+  width: 20px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #DD2A7B;
+  color: white;
+}

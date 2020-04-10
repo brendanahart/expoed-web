@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutGap="2%" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="2%" fxLayoutAlign="space-around center" style="margin-top: 2%">
+<div fxLayout="row" fxLayoutGap="2%" fxLayout.lt-sm="column" fxLayoutGap.lt-sm="2%" fxLayoutAlign="space-around center" class="restaurant-detail-container">
   <div fxFlex="30%">
     <div *ngIf="restaurant.pictureUrl !== '' && restaurant.pictureUrl !== null">
       <img [src]="restaurant.pictureUrl" alt="Profile Picture" />
@@ -9,13 +9,13 @@
     <h3> {{ restaurant.description }} </h3>
     <h3> Verified: {{ restaurant.verified }} </h3>
     <h3> Address: {{ restaurant.address }} {{ restaurant.addressTwo }}, {{ restaurant.city }}, {{ restaurant.state }} {{ restaurant.zipCode }}</h3>
-    <div><a *ngIf="restaurant.instagram != ''" mat-button (click)="onExternalLink(restaurant.instagram)">Instagram</a></div>
-    <div><a *ngIf="restaurant.twitter != ''" mat-button (click)="onExternalLink(restaurant.twitter)">Twitter</a></div>
-    <div><a *ngIf="restaurant.facebook != ''" mat-button (click)="onExternalLink(restaurant.facebook)">Facebook</a></div>
-    <div><a mat-flat-button *ngIf="restaurant.website != ''" (click)="onExternalLink(restaurant.website)">Website</a></div>
+    <a *ngIf="restaurant.instagram != ''" class="fa fa-instagram" (click)="onExternalLink(restaurant.instagram)"></a>
+    <a *ngIf="restaurant.twitter != ''" class="fa fa-twitter" (click)="onExternalLink(restaurant.twitter)"></a>
+    <a *ngIf="restaurant.facebook != ''" class="fa fa-facebook" (click)="onExternalLink(restaurant.facebook)"></a>
+    <a mat-flat-button *ngIf="restaurant.website != ''" (click)="onExternalLink(restaurant.website)">Website</a>
     <mat-divider class="matDividerMargin"></mat-divider>
     <div class="restaurantHelpers">
-      <h1 style="text-align: center">Helpers</h1>
+      <h1 style="text-align: left">Helpers</h1>
       <h4 *ngFor="let help of helpers">{{ help.helper }} - {{ help.offerName}}</h4>
     </div>
   </div>
@@ -32,9 +32,5 @@
       </mat-card-actions>
     </mat-card>
     <button mat-raised-button color="accent">Tip Jar</button>
-  </div>
-</div>
-<div fxLayout="row" fxLayoutGap="2%" fxLayout.xs="column" fxLayoutAlign="space-around start" style="margin-top: 2%">
-  <div>
   </div>
 </div>

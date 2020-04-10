@@ -5,6 +5,13 @@ img { width: 60%; height: 60%; align-items: center; text-align: center; display:
   margin-bottom: 10px;
 }
 
+div[fxLayoutAlign]
+{
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+
 .button-container {
   display: flex;
   justify-content: center;

@@ -46,4 +46,8 @@ export class NavigationComponent implements OnInit {
     return user;
   }
 
+  goHome() {
+    this.router.navigate(['']);
+  }
+
 }

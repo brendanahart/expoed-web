@@ -2,7 +2,7 @@
   text-align: right;
   font-size: x-small;
   color: slategray;
-  max-height: 18px;
+  max-height: 20px;
 }
 
 .footerTextContainer {
@@ -12,4 +12,8 @@
 
 .example-fill-remaining-space {
   flex: 1 1 auto;
+}
+
+.empty-toolbar-row {
+  height: 18px;
 }
