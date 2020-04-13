@@ -30,6 +30,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import { FooterComponent } from './navigation/footer/footer.component';
 import { UserFaqComponent } from './faq/user-faq/user-faq.component';
+import { PartnersComponent } from './home/partners/partners.component';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { UserFaqComponent } from './faq/user-faq/user-faq.component';
     RestaurantDetailComponent,
     FooterComponent,
     UserFaqComponent,
+    PartnersComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ import { UserFaqComponent } from './faq/user-faq/user-faq.component';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatDividerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

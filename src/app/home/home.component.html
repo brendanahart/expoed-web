@@ -12,16 +12,17 @@
   </div>
 </div>
 <div fxLayout="row" fxLayoutGap="2%" fxLayout.lt-sm="column" fxLayoutAlign="center center" class="header-spacing" style="margin-bottom: 30px">
-  <button mat-flat-button color="primary" [routerLink]="['/partner']">Become an Expoed Restaurant Partner</button>
+  <button mat-flat-button color="primary" (click)="auth.login(callbackLoginURL)">Become an Expoed Restaurant Partner</button>
   <button mat-flat-button color="primary" (click)="auth.login(callbackLoginURL)">Join Expoed as an Eater</button>
 </div>
 <div fxLayout="row" fxLayoutGap="2%" fxLayoutAlign="center center" class="header-spacing" style="margin-bottom: 30px">
-  <img mat-card-image src="assets/site/empty_table.jpeg" alt="Photo of empty restaurant">
+  <img mat-card-image src="assets/site/empty_table.jpg" alt="Photo of empty restaurant">
 </div>
 <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="space-around center" fxLayoutGap="2%" fxLayoutAlign="center start" class="header-spacing">
   <div fxFlex="45%">
     <h2>What does Expoed mean?</h2>
     <p>Expoed comes from the restaurant term Expeditor. An Expeditor is a term used within kitchens to tell everyone what to cook and what is going on. Become an virtual expeditor for your own favorite restaurant and join expoed today!</p>
+    <button mat-flat-button color="primary" (click)="goToCurrentRestaurants()">View Current Partnered Restaurants</button>
   </div>
   <div fxFlex="45%">
     <h2>What does Expoed offer?</h2>

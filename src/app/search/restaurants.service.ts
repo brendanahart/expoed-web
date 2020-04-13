@@ -26,4 +26,13 @@ export class RestaurantsService extends GeneralHttpService  {
         catchError(this.handleError)
       );
   }
+
+  getAllRestaurants(searchTerm) {
+    const restaurantSearch = new RestaurantSearch(searchTerm);
+
+    return this.http.post<RestaurantInfo[]>(this.url + 'All', restaurantSearch)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 }

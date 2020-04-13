@@ -11,6 +11,7 @@ import {RestaurantSearchComponent} from './home/restaurant-search/restaurant-sea
 import {RestaurantDetailComponent} from './home/restaurant-detail/restaurant-detail.component';
 import {AuthGuard} from './auth/auth-guard.service';
 import {UserFaqComponent} from './faq/user-faq/user-faq.component';
+import {PartnersComponent} from './home/partners/partners.component';
 
 
 const appRoutes: Routes = [
@@ -33,11 +34,19 @@ const appRoutes: Routes = [
     component: RestaurantFaqComponent
   },
   {
+    path: 'partners',
+    component: PartnersComponent
+  },
+  {
     path: 'waiting',
     component: UserFaqComponent
   },
   {
     path: 'search/:term',
+    component: RestaurantSearchComponent
+  },
+  {
+    path: 'search',
     component: RestaurantSearchComponent
   },
   {

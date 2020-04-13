@@ -1,13 +1,15 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <mat-icon [routerLink]="['']" svgIcon="candy" aria-hidden="false" aria-label="Logo"></mat-icon>
+    <mat-icon (click)="goHome()" svgIcon="candy" aria-hidden="false" aria-label="Logo"></mat-icon>
     <span class="example-fill-remaining-space"></span>
     <span class="example-fill-remaining-space"></span>
     <div class="footerTextContainer">
       <a class="footerText" [routerLink]="['/waiting']"> User FAQ </a>
       <a class="footerText" [routerLink]="['/partner']"> Restaurant FAQ </a>
+      <a class="footerText" [routerLink]="['/partners']"> Current Partners </a>
       <p class="footerText"> © Expoed 2020. All Rights Reserved </p>
     </div>
   </mat-toolbar-row>
+  <mat-toolbar-row class="empty-toolbar-row"></mat-toolbar-row>
   <mat-toolbar-row class="empty-toolbar-row"></mat-toolbar-row>
 </mat-toolbar>

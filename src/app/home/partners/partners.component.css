@@ -1,0 +1,22 @@
+.header-spacing {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+div[fxLayoutAlign]
+{
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+table {
+  width: 100%;
+}
+
+.header-text {
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}

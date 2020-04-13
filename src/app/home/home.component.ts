@@ -20,4 +20,8 @@ export class HomeComponent implements OnInit {
 
   }
 
+  goToCurrentRestaurants() {
+    this.router.navigate(['/partners']);
+  }
+
 }

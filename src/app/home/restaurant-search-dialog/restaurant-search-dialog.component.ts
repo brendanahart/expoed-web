@@ -18,8 +18,6 @@ export class RestaurantSearchDialogComponent implements OnInit {
   }
 
   search(searchTerm): void {
-    this.router.navigate(['/search', searchTerm]).then(() => {
-      window.location.reload();
-    });
+    this.router.navigate(['/search', searchTerm]);
   }
 }
