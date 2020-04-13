@@ -17,3 +17,7 @@
 .empty-toolbar-row {
   height: 15px;
 }
+
+img {
+  max-width: 5%;
+}

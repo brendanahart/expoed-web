@@ -1,6 +1,4 @@
 <mat-toolbar>
-  <mat-icon (click)="goHome()" class="homeLink" svgIcon="candy" aria-hidden="false" aria-label="Example thumbs up SVG icon"></mat-icon>
-  <div class="spacing"></div>
   <div (click)="goHome()"><h2 class="homeLink"><a> {{ title }} </a></h2></div>
   <div fxFlex fxLayout fxLayoutAlign="end" fxLayoutGap="1%">
     <button mat-button color="accent" *ngIf="!auth.loggedIn" (click)="auth.login(callbackLoginURL)">Sign In</button>

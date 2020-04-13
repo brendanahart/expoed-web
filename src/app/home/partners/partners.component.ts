@@ -14,7 +14,8 @@ import {Observable} from 'rxjs';
 export class PartnersComponent implements OnInit {
 
   displayedColumns: string[] = ['Name', 'Address', 'City', 'Email'];
-  displayedColumnsIndex: string[] = ['name', 'address', 'city', 'email'];
+  displayedColumnsAdj: string[] = ['Address', 'City', 'Email'];
+  displayedColumnsAdjIndex: string[] = ['address', 'city', 'email'];
 
   dataSource = new MatTableDataSource([]);
 
@@ -30,10 +31,12 @@ export class PartnersComponent implements OnInit {
   ngOnInit(): void {
     if (window.innerWidth <= 900) {
       this.displayedColumns = ['Name', 'City'];
-      this.displayedColumnsIndex = ['name', 'city'];
+      this.displayedColumnsAdj = ['City'];
+      this.displayedColumnsAdjIndex = ['city'];
     } else {
       this.displayedColumns = ['Name', 'Address', 'City', 'Email'];
-      this.displayedColumnsIndex = ['name', 'address', 'city', 'email'];
+      this.displayedColumnsAdj = ['Address', 'City', 'Email'];
+      this.displayedColumnsAdjIndex = ['address', 'city', 'email'];
     }
 
     this.restaurants$ = this.service.getAllRestaurants('');
@@ -53,10 +56,12 @@ export class PartnersComponent implements OnInit {
   onResizeTable(event): void {
     if (event.target.innerWidth <= 900) {
       this.displayedColumns = ['Name', 'City'];
-      this.displayedColumnsIndex = ['name', 'city'];
+      this.displayedColumnsAdj = ['City'];
+      this.displayedColumnsAdjIndex = ['city'];
     } else {
       this.displayedColumns = ['Name', 'Address', 'City', 'Email'];
-      this.displayedColumnsIndex = ['name', 'address', 'city', 'email'];
+      this.displayedColumnsAdj = ['Address', 'City', 'Email'];
+      this.displayedColumnsAdjIndex = ['address', 'city', 'email'];
     }
   }
 }

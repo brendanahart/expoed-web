@@ -20,3 +20,11 @@ table {
   margin-bottom: 10px;
   text-align: center;
 }
+
+a {
+  color: white;
+}
+
+a:hover {
+  cursor: pointer;
+}
