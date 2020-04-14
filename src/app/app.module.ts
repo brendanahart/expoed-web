@@ -33,6 +33,8 @@ import { UserFaqComponent } from './faq/user-faq/user-faq.component';
 import { PartnersComponent } from './home/partners/partners.component';
 import {MatSortModule} from '@angular/material/sort';
 import { LoginComponent } from './login/login.component';
+import { TipComponent } from './home/restaurant-detail/tip/tip.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { LoginComponent } from './login/login.component';
     UserFaqComponent,
     PartnersComponent,
     LoginComponent,
+    TipComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ import { LoginComponent } from './login/login.component';
     MatPaginatorModule,
     MatDividerModule,
     MatChipsModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

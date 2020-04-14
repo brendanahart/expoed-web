@@ -16,6 +16,8 @@ import {OfferPaymentService} from '../offer-payment.service';
 import {loadStripe} from '@stripe/stripe-js';
 import {Helper} from './helper';
 import {AuthGuard} from '../../auth/auth-guard.service';
+import {TipComponent} from './tip/tip.component';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @Component({
@@ -42,7 +44,8 @@ export class RestaurantDetailComponent implements OnInit {
   userId: string;
 
   constructor(private route: ActivatedRoute, private service: RestaurantProfileService,
-              private auth: AuthService, private router: Router, private payment: OfferPaymentService, private authGuard: AuthGuard) { }
+              private auth: AuthService, private router: Router, private payment: OfferPaymentService, private authGuard: AuthGuard,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.restaurant = new RestaurantInfo();
@@ -93,6 +96,40 @@ export class RestaurantDetailComponent implements OnInit {
     window.location.href = withHttp(link);
   }
 
+  paymentHandler(offer, restaurant): void {
+    // create a payment object
+    const paymentInfo = new PaymentInfo(offer, restaurant.restaurant, this.restaurant.stripe,
+      this.domainDetail + this.router.url, this.user);
+
+    if (this.industry === ProfileType.profileTypeE) {
+      paymentInfo.returnUrl = this.domainDetail + '/eater';
+    } else {
+      paymentInfo.returnUrl = this.domainDetail + '/restaurant';
+    }
+
+    this.payment.postPaymentInfo(paymentInfo).subscribe(async paymentRes => {
+      const stripeCheckoutId = paymentRes['id'];
+
+      const stripe = await loadStripe(environment.stripeKey, {
+        stripeAccount: paymentInfo.stripe
+      });
+
+      stripe.redirectToCheckout({
+        // Make the id field from the Checkout Session creation API response
+        // available to this file, so you can provide it as parameter here
+        // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
+        sessionId: stripeCheckoutId,
+      }).then( (result) => {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+        console.log(result.error.message);
+      }).catch((result) => {
+        console.log(result);
+      });
+    });
+  }
+
   onBuyHandler(offer: RestaurantOffering, restaurant: RestaurantInfo) {
 
     this.auth.isAuthenticated$.subscribe((res) => {
@@ -101,40 +138,34 @@ export class RestaurantDetailComponent implements OnInit {
       if (!loggedIn) {
         this.auth.login(this.router.routerState.snapshot.url);
       } else {
-        // create a payment object
-        const paymentInfo = new PaymentInfo(offer, restaurant.restaurant, this.restaurant.stripe,
-          this.domainDetail + this.router.url, this.user);
-
-        if (this.industry === ProfileType.profileTypeE) {
-          paymentInfo.returnUrl = this.domainDetail + '/eater';
-        } else {
-          paymentInfo.returnUrl = this.domainDetail + '/restaurant';
-        }
-
-        this.payment.postPaymentInfo(paymentInfo).subscribe(async res => {
-          const stripeCheckoutId = res['id'];
-
-          const stripe = await loadStripe(environment.stripeKey, {
-            stripeAccount: paymentInfo.stripe
-          });
-
-          stripe.redirectToCheckout({
-            // Make the id field from the Checkout Session creation API response
-            // available to this file, so you can provide it as parameter here
-            // instead of the {{CHECKOUT_SESSION_ID}} placeholder.
-            sessionId: stripeCheckoutId,
-          }).then( (result) => {
-            // If `redirectToCheckout` fails due to a browser or network
-            // error, display the localized error message to your customer
-            // using `result.error.message`.
-            console.log(result.error.message);
-          }).catch((result) => {
-            console.log(result);
-          });
-        });
+        this.paymentHandler(offer, restaurant);
       }
     }, (err) => {
       console.log(err);
+    });
+  }
+
+  openDialog(): void {
+    this.auth.isAuthenticated$.subscribe((res) => {
+      const loggedIn = res;
+
+      if (!loggedIn) {
+        this.auth.login(this.router.routerState.snapshot.url);
+      } else {
+        const dialogRef = this.dialog.open(TipComponent, {
+          width: '350px',
+          data: {offering:
+              new RestaurantOffering(this.user, 'Tip',
+                'This is a tip for the workers and owners of the restaurant', 1),
+            restaurant: this.restaurant
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.paymentHandler(result.offering, result.restaurant);
+        });
+      }
     });
   }
 }

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Tip Jar</h1>
+<div mat-dialog-content>
+  <p>How much would you like to tip?</p>
+  <mat-form-field>
+    <mat-label>Tip Amount</mat-label>
+    <input matInput type="number" [(ngModel)]="data.offering.price" placeholder="1">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button button color="warn" (click)="onNoClick()">No Thanks</button>
+  <button mat-flat-button button color="accent" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
