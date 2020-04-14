@@ -13,9 +13,9 @@ import {Observable} from 'rxjs';
 })
 export class PartnersComponent implements OnInit {
 
-  displayedColumns: string[] = ['Name', 'Address', 'City', 'Email'];
-  displayedColumnsAdj: string[] = ['Address', 'City', 'Email'];
-  displayedColumnsAdjIndex: string[] = ['address', 'city', 'email'];
+  displayedColumns: string[] = ['Name', 'Address', 'City'];
+  displayedColumnsAdj: string[] = ['Address', 'City'];
+  displayedColumnsAdjIndex: string[] = ['address', 'city'];
 
   dataSource = new MatTableDataSource([]);
 
@@ -34,9 +34,9 @@ export class PartnersComponent implements OnInit {
       this.displayedColumnsAdj = ['City'];
       this.displayedColumnsAdjIndex = ['city'];
     } else {
-      this.displayedColumns = ['Name', 'Address', 'City', 'Email'];
-      this.displayedColumnsAdj = ['Address', 'City', 'Email'];
-      this.displayedColumnsAdjIndex = ['address', 'city', 'email'];
+      this.displayedColumns = ['Name', 'Address', 'City'];
+      this.displayedColumnsAdj = ['Address', 'City'];
+      this.displayedColumnsAdjIndex = ['address', 'city'];
     }
 
     this.restaurants$ = this.service.getAllRestaurants('');
@@ -59,9 +59,9 @@ export class PartnersComponent implements OnInit {
       this.displayedColumnsAdj = ['City'];
       this.displayedColumnsAdjIndex = ['city'];
     } else {
-      this.displayedColumns = ['Name', 'Address', 'City', 'Email'];
-      this.displayedColumnsAdj = ['Address', 'City', 'Email'];
-      this.displayedColumnsAdjIndex = ['address', 'city', 'email'];
+      this.displayedColumns = ['Name', 'Address', 'City'];
+      this.displayedColumnsAdj = ['Address', 'City'];
+      this.displayedColumnsAdjIndex = ['address', 'city'];
     }
   }
 }
