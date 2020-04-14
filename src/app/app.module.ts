@@ -32,6 +32,7 @@ import { FooterComponent } from './navigation/footer/footer.component';
 import { UserFaqComponent } from './faq/user-faq/user-faq.component';
 import { PartnersComponent } from './home/partners/partners.component';
 import {MatSortModule} from '@angular/material/sort';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {MatSortModule} from '@angular/material/sort';
     FooterComponent,
     UserFaqComponent,
     PartnersComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import {RestaurantDetailComponent} from './home/restaurant-detail/restaurant-det
 import {AuthGuard} from './auth/auth-guard.service';
 import {UserFaqComponent} from './faq/user-faq/user-faq.component';
 import {PartnersComponent} from './home/partners/partners.component';
+import {LoginComponent} from './login/login.component';
 
 
 const appRoutes: Routes = [
@@ -23,6 +24,10 @@ const appRoutes: Routes = [
     path: 'eater',
     component: PersonProfileComponent,
     canActivate: [EaterGuardService]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'restaurant',
